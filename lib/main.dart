@@ -28,6 +28,69 @@ class _HomePageState extends State<HomePage>
     );
   }
 
+  List<WhatsAppDetails> details = [
+    WhatsAppDetails(
+      'Sriram1',
+      'hello',
+      '16:52',
+      MessageStatus.delivered,
+    ),
+    WhatsAppDetails(
+      'Sriram2',
+      'hello2',
+      '16:53',
+      MessageStatus.delivered,
+    ),
+    WhatsAppDetails(
+      'Sriram3',
+      'bhak',
+      '16:52',
+      MessageStatus.delivered,
+    ),
+    WhatsAppDetails(
+      'Sriram4',
+      'dontRead',
+      '16:52',
+      MessageStatus.delivered,
+    ),
+    WhatsAppDetails(
+      'Sriram5',
+      'ez4ence',
+      '16:52',
+      MessageStatus.delivered,
+    ),
+    WhatsAppDetails(
+      'Sriram6',
+      'KennyS',
+      '16:52',
+      MessageStatus.delivered,
+    ),
+    WhatsAppDetails(
+      'Sriram7',
+      ':)',
+      '16:52',
+      MessageStatus.delivered,
+    ),
+    WhatsAppDetails(
+      'Sriram8',
+      'hi',
+      '16:52',
+      MessageStatus.delivered,
+    ),
+    WhatsAppDetails(
+      'Sriram9',
+      'LLG',
+      '16:52',
+      MessageStatus.delivered,
+    ),
+    WhatsAppDetails(
+      'Sriram10',
+      'hello',
+      '16:52',
+      MessageStatus.delivered,
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     Color whatsAppColor = Color(0xFF32642E);
@@ -75,15 +138,32 @@ class _HomePageState extends State<HomePage>
       ),
       body:
       ListView.builder(
-          itemCount: 10,
+          itemCount: details.length,
           itemBuilder: (BuildContext context, int count) {
-            return WhatsAppCard();
+            return WhatsAppCard(
+              name: details[count].name,
+              message: details[count].message,
+              time: details[count].time,
+              status: details[count].status,
+            );
           }),
     );
   }
 }
 
 class WhatsAppCard extends StatelessWidget {
+  final String name;
+  final String message;
+  final String time;
+  final MessageStatus status;
+  WhatsAppCard({
+      this.name,
+      this.message,
+      this.time,
+      this.status,
+  });
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -107,7 +187,7 @@ class WhatsAppCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Text(
-                  'SRIRAM',
+                  name,
                   style: TextStyle(
                       fontSize: 30, //fontFamily: 'myscars' ,
                       fontWeight: FontWeight.w400),
@@ -121,7 +201,7 @@ class WhatsAppCard extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     Text(
-                      'SUP!',
+                      message,
                       style: TextStyle(color: Colors.grey),
                     )
                   ],
@@ -134,11 +214,22 @@ class WhatsAppCard extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(top: 14.0),
-            child: Text('15:32'),
+            child: Text(time),
           ),
         ],
       ),
     );
   }
 }
-
+class WhatsAppDetails{
+  String name;
+  String message;
+  String time;
+  MessageStatus status;
+  WhatsAppDetails(this.name,this.message,this.time,this.status);
+}
+enum MessageStatus{
+  delivered,
+  recieved,
+  seen
+}
